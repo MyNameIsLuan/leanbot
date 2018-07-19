@@ -47,6 +47,22 @@ client.on("guildMemberAdd", member =>{
       
     }
     });
+
+    client.on("guildMemberAdd", member => {
+      if(member.guild.id == "467798739407601665"){
+          const channel = member.guild.channels.get("469644611363536903");
+          channel.setName(`Membros: ${member.guild.memberCount - member.guild.members.filter(m=>m.user.bot).size}`)
+      }
+  });
+  
+  
+  client.on("guildMemberRemove", member => {
+      if(member.guild.id == "467798739407601665"){
+          const channel = member.guild.channels.get("469644611363536903");
+          channel.setName(`Membros: ${member.guild.memberCount - member.guild.members.filter(m=>m.user.bot).size}`)
+      }
+  });
+;
 ;
 
 
