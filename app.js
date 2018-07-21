@@ -7,7 +7,7 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
-client.login(process.env.SpongeNetwork);
+client.login(process.env.LeanBOT);
 
 
 client.on('ready', () =>{
@@ -15,58 +15,15 @@ console.log('\n==============================');
 console.log('CONECTADO! BOT ONLINE!');
 console.log(`O meu prefixo � ${prefix}`);
 console.log('==============================');
-
-
-//let gameloop = require(`./comando_kally/gameloop.js`);
-//gameloop.run(client);
   
 });
 
-client.on("guildMemberRemove", member =>{
-    if(member.guild.id === "467798739407601665"){
-        const leave = new Discord.RichEmbed()
-        .setAuthor(member.user.tag)
-        .setDescription(":outbox_tray: Volte logo!")
-        .setThumbnail(member.user.avatarURL)
-        .setColor("#36393f")
-        .setFooter("Sponge BOT - copyright")
-      client.channels.get("468833463861116939").send(leave)
-
-    }
-});
-
-client.on("guildMemberAdd", member =>{
-    if(member.guild.id === "467798739407601665"){
-        const join = new Discord.RichEmbed()
-        .setAuthor(member.user.tag)
-        .setDescription(":inbox_tray:  bem vindo ao servidor! Esperamos que você se divirta!")
-        .setThumbnail(member.user.avatarURL)
-        .setColor("#36393f")
-        .setFooter("Spoonge BOT - copyright")
-      client.channels.get("468833292808880148").send(join)
-      
-    }
-    });
-
-    client.on("guildMemberAdd", member => {
-      if(member.guild.id == "467798739407601665"){
-          const channel = member.guild.channels.get("469644611363536903");
-          channel.setName(`Membros: ${member.guild.memberCount - member.guild.members.filter(m=>m.user.bot).size}`)
-      }
-  });
-  
-  
-  client.on("guildMemberRemove", member => {
-      if(member.guild.id == "467798739407601665"){
-          const channel = member.guild.channels.get("469644611363536903");
-          channel.setName(`Membros: ${member.guild.memberCount - member.guild.members.filter(m=>m.user.bot).size}`)
-      }
-  });
-;
-;
-
-
-
+client.on('message', message =>{
+  if(message.content.includes("https://discord.gg/")){
+      message.delete()
+    message.channel.send(`${message.author}, Neste grupo, é proibido à divulgação de convites de outros grupos!`)
+  }
+})
 
 client.on("error", e => console.log(e));
 
@@ -97,6 +54,7 @@ if(!message.content.startsWith(prefix)) return;
    } catch (err) {
      
      message.channel.send(`:question: **|** ${message.author} comando inexistente ou não foi feito ainda!`).then(msg => msg.delete(5000));
+
 	   return;
    }
   
